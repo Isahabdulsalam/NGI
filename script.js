@@ -1,5 +1,4 @@
-// Mobile navigation toggle
-        const mobileToggle = document.getElementById('mobileToggle');
+const mobileToggle = document.getElementById('mobileToggle');
         const navMenu = document.getElementById('navMenu');
         
         mobileToggle.addEventListener('click', function() {
@@ -39,6 +38,18 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+        
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.classList.toggle('active');
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
         });
         
         // Form submission

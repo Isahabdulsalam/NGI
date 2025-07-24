@@ -194,7 +194,10 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
             color: var(--white);
             padding: 200px 0 120px;
             text-align: center;
@@ -228,6 +231,7 @@
             color: var(--white);
             font-weight: 800;
             letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .hero p {
@@ -236,6 +240,7 @@
             margin: 0 auto 40px;
             opacity: 0.9;
             font-weight: 400;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
         .hero-buttons {
@@ -278,8 +283,41 @@
             line-height: 1.6;
         }
 
-        /* About Section */
-        .about {
+
+        /* Sections */
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 70px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-top: 25px;
+            line-height: 1.6;
+        }
+
+.about {
             background-color: var(--white);
             position: relative;
             overflow: hidden;
@@ -324,13 +362,11 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             height: 500px;
-            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1722&q=80');
+            background-size: cover;
+            background-position: center;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
+            align-items: flex-end;
             position: relative;
         }
 
@@ -341,8 +377,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgODAgODAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTAgMEg4MFY4MEgwVjBaIiBmaWxsPSIjMTk0NDhhIi8+CiAgPHBhdGggZD0iTTAgMEg0MFY0MEgwVjBaIiBmaWxsPSIjZDRhZjM3Ii8+CiAgPHBhdGggZD0iTTQwIDBIOThWNDBINDBWMFoiIGZpbGw9IiNkNGFmMzciLz4KICA8cGF0aCBkPSJNMCA0MEg0MFY4MEgwVjQwWiIgZmlsbD0iI2Q0YWYzNyIvPgogIDxwYXRoIGQ9Ik00MCA0MEg4MFY4MEg0MFY0MFoiIGZpbGw9IiNkNGFmMzciLz4KPC9zdmc+');
-            opacity: 0.2;
+            background: linear-gradient(to top, rgba(26,58,108,0.8) 0%, transparent 70%);
+        }
+
+        .image-caption {
+            padding: 30px;
+            color: white;
+            position: relative;
+            z-index: 2;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
         /* Initiatives Section */
@@ -485,13 +529,9 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             height: 500px;
-            background: linear-gradient(45deg, var(--secondary), var(--secondary-light));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark);
-            font-size: 1.8rem;
-            font-weight: 700;
+            background: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
             position: relative;
         }
 

@@ -1320,7 +1320,7 @@
             
             .about-image,
             .why-image {
-                height: 400px;
+                height: 500px;
             }
             
             .section-title {
@@ -1332,42 +1332,10 @@
             }
         }
 
-        @media(min-width: 992px) {
-            :root {
-                --section-padding: 80px, 0;
-            }
-            .hero {
-                padding: 180px 0 1-00px;
-            }
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            .about-content,.why-content,.contact-content {
-                flex-direction: column;
-                gap: 50px;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-            .section-title{
-                font-size: 3.2rem;
-            }
-        }
         @media (max-width: 768px) {
             .mobile-toggle {
                 display: block;
             }
-
-            .why-content {
-        flex-direction: column;
-    }
-
-    .why-image {
-        width: 100%;
-        height: 250px;
-        background-size: contain;
-    }
             
             .nav-menu {
                 position: fixed;
@@ -1377,7 +1345,7 @@
                 height: 100vh;
                 background: var(--white);
                 flex-direction: column;
-                padding: 0.5rem;
+                padding: 100px 30px 30px;
                 transition: var(--transition);
                 box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
                 z-index: 1000;
@@ -1430,15 +1398,15 @@
 
         @media (max-width: 576px) {
             .hero h1 {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1.05rem;
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .logo-text {
@@ -1463,13 +1431,5 @@
             .initiative-title {
                 font-size: 1.5rem;
             }
-           .get-involved h2 {
-                font-size: 2.2rem;
-            }
-            
-            .get-involved p {
-                font-size: 1.1rem;
-            }
-
         }
 

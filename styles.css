@@ -526,15 +526,23 @@
         }
 
         .why-image {
-            flex: 1;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            height: 500px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
+    flex: 0 0 300px; /* Or remove if you want it to resize */
+    height: auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.why-image img {
+    width: 50%;
+    height: auto;
+    display: block;
+    border-radius: inherit;
+}
+
+
+
+
 
         .why-text {
             flex: 1;
@@ -1350,6 +1358,16 @@
             .mobile-toggle {
                 display: block;
             }
+
+            .why-content {
+        flex-direction: column;
+    }
+
+    .why-image {
+        width: 100%;
+        height: 250px;
+        background-size: contain;
+    }
             
             .nav-menu {
                 position: fixed;

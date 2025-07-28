@@ -1342,7 +1342,7 @@
 
         @media (max-width: 768px) {
             .mobile-toggle {
-                display: block;
+                display: flex;
             }
             
              .handbook {
@@ -1405,6 +1405,10 @@
             .vision-section {
                 padding: 35px 25px;
             }
+
+            header {
+                padding: 12px 0;
+    }
             
             .section-header.news-header {
                 flex-direction: column;

@@ -1323,7 +1323,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             .mobile-toggle {
                 display: block;
             }
@@ -1336,7 +1336,7 @@
                 height: 100vh;
                 background: var(--white);
                 flex-direction: column;
-                padding: 100px 30px 30px;
+                padding: 0.5rem;
                 transition: var(--transition);
                 box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
                 z-index: 1000;

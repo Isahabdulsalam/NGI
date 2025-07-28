@@ -192,6 +192,12 @@
             color: var(--primary);
             cursor: pointer;
             z-index: 1001;
+            padding: 15px; /* Creates larger tap target */
+    min-width: 48px; /* Minimum recommended touch target size */
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
         }
 
         /* Hero Section */

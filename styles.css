@@ -200,6 +200,11 @@
     justify-content: center;
         }
 
+        .mobile-toggle:active {
+    background: rgba(26, 58, 108, 0.1);
+    border-radius: 4px;
+}
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
@@ -1416,6 +1421,13 @@
                 text-align: center;
             }
         }
+
+        @media (max-width: 480px) {
+    .mobile-toggle {
+        padding: 12px;
+        font-size: 1.5rem;
+    }
+}
 
         @media (max-width: 576px) {
             .hero h1 {

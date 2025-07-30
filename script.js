@@ -1,63 +1,266 @@
+// Mobile menu toggle functionality
 const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
+const navMenu = document.getElementById('navMenu');
+
+if (mobileToggle && navMenu) {
+    mobileToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
         
-        mobileToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            mobileToggle.innerHTML = navMenu.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        // Change icon based on menu state
+        mobileToggle.innerHTML = navMenu.classList.contains('active') ? 
+            '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
         });
+    });
+}
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        // Skip for # links that don't reference elements
+        if (this.getAttribute('href') === '#') return;
         
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (target) {
+            // Calculate scroll position considering fixed header
+            const headerHeight = document.getElementById('header').offsetHeight;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+            const scrollPosition = targetPosition - headerHeight;
+            
+            window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
             });
-        });
+            
+            // Update URL without adding history entry
+            history.replaceState(null, null, targetId);
+        }
+    });
+});
+
+// Header scroll effect
+const header = document.getElementById('header');
+if (header) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+}
+
+// FAQ toggle functionality
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(question => {
+    question.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        answer.classList.toggle('active');
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+        const icon = this.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+    });
+});
+
+// Form submission handling
+const contactForm = document.querySelector('.contact-form form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Basic form validation
+        const nameInput = contactForm.querySelector('#name');
+        const emailInput = contactForm.querySelector('#email');
+        const messageInput = contactForm.querySelector('#message');
+        let isValid = true;
+        
+        // Reset previous errors
+        contactForm.querySelectorAll('.error').forEach(el => el.remove());
+        
+        // Name validation
+        if (!nameInput.value.trim()) {
+            showError(nameInput, 'Name is required');
+            isValid = false;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailInput.value.trim()) {
+            showError(emailInput, 'Email is required');
+            isValid = false;
+        } else if (!emailRegex.test(emailInput.value)) {
+            showError(emailInput, 'Please enter a valid email');
+            isValid = false;
+        }
+        
+        // Message validation
+        if (!messageInput.value.trim()) {
+            showError(messageInput, 'Message is required');
+            isValid = false;
+        }
+        
+        if (isValid) {
+            // Create a fake submit animation
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.className = 'form-success';
+                successMsg.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <p>Thank you for your message! We will get back to you soon.</p>
+                `;
+                contactForm.parentNode.insertBefore(successMsg, contactForm.nextSibling);
                 
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+                // Reset form
+                contactForm.reset();
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                
+                // Remove success message after 5 seconds
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 5000);
+            }, 1500);
+        }
+    });
+}
+
+// Helper function to show error messages
+function showError(input, message) {
+    const error = document.createElement('div');
+    error.className = 'error';
+    error.textContent = message;
+    error.style.color = '#e74c3c';
+    error.style.fontSize = '0.9rem';
+    error.style.marginTop = '5px';
+    
+    input.parentNode.appendChild(error);
+    
+    // Highlight input with error
+    input.style.borderColor = '#e74c3c';
+    
+    // Remove error on input
+    input.addEventListener('input', function() {
+        error.remove();
+        input.style.borderColor = '';
+    }, { once: true });
+}
+
+// Initialize image carousel
+function initCarousel() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dots = document.querySelectorAll('.dot');
+    
+    let currentIndex = 0;
+    const slideCount = slides.length;
+    
+    // Function to go to a specific slide
+    function goToSlide(index) {
+        if (index < 0) index = slideCount - 1;
+        else if (index >= slideCount) index = 0;
         
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
+        currentIndex = index;
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        // Update active dot
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    // Navigation event listeners
+    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+    
+    // Auto-advance slides every 5 seconds
+    let slideInterval = setInterval(() => goToSlide(currentIndex + 1), 5000);
+    
+    // Pause on hover
+    carousel.parentElement.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    carousel.parentElement.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(() => goToSlide(currentIndex + 1), 5000);
+    });
+}
+
+// Initialize gallery navigation
+function initGallery() {
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+    
+    if (!galleryPrev || !galleryNext) return;
+    
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    let currentPage = 0;
+    const itemsPerPage = window.innerWidth > 992 ? 3 : window.innerWidth > 768 ? 2 : 1;
+    const pageCount = Math.ceil(galleryItems.length / itemsPerPage);
+    
+    function showPage(page) {
+        galleryItems.forEach((item, index) => {
+            const startIndex = page * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            
+            if (index >= startIndex && index < endIndex) {
+                item.style.display = 'block';
             } else {
-                header.classList.remove('scrolled');
+                item.style.display = 'none';
             }
         });
-        
-        // FAQ toggle functionality
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const answer = this.nextElementSibling;
-                answer.classList.toggle('active');
-                const icon = this.querySelector('i');
-                icon.classList.toggle('fa-chevron-down');
-                icon.classList.toggle('fa-chevron-up');
-            });
-        });
-        
-        // Form submission
-        const contactForm = document.querySelector('.contact-form form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            });
+    }
+    
+    galleryPrev.addEventListener('click', () => {
+        currentPage = (currentPage - 1 + pageCount) % pageCount;
+        showPage(currentPage);
+    });
+    
+    galleryNext.addEventListener('click', () => {
+        currentPage = (currentPage + 1) % pageCount;
+        showPage(currentPage);
+    });
+    
+    // Initialize gallery display
+    showPage(currentPage);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const newItemsPerPage = window.innerWidth > 992 ? 3 : window.innerWidth > 768 ? 2 : 1;
+        if (newItemsPerPage !== itemsPerPage) {
+            currentPage = 0;
+            showPage(currentPage);
         }
+    });
+}
+
+// Initialize components when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initCarousel();
+    initGallery();
+});

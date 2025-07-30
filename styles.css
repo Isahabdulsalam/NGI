@@ -342,20 +342,8 @@ header.scrolled {
 }
 
 .about-image {
-    flex: 1;
-    min-width: 300px;
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: var(--shadow);
-    max-height: 500px;
-<<<<<<< HEAD
-=======
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
-    position: relative;
->>>>>>> a9e5607ac28fa31d7a49bcf06a2cbcda6b097957
 }
 
 .about-image img{
@@ -375,7 +363,6 @@ header.scrolled {
     bottom: 0;
     background: linear-gradient(to top, rgba(26,58,108,0.8) 0%, transparent 70%);
 }
-
 /* Initiatives Section */
 .initiatives {
     background-color: var(--light-alt);
@@ -1738,7 +1725,6 @@ footer {
         margin-right: 0;
         margin-bottom: 15px;
     }
-<<<<<<< HEAD
 
     .carousel-container {
         height: 250px;
@@ -1753,6 +1739,3 @@ footer {
         padding: 15px;
     }
 }
-=======
-}
->>>>>>> a9e5607ac28fa31d7a49bcf06a2cbcda6b097957

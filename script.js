@@ -202,7 +202,7 @@ function initCarousel() {
     });
     
     // Auto-advance slides every 5 seconds
-    let slideInterval = setInterval(() => goToSlide(currentIndex + 1), 5000);
+    let slideInterval = setInterval(() => goToSlide(currentIndex + 1), 3000);
     
     // Pause on hover
     carousel.parentElement.addEventListener('mouseenter', () => clearInterval(slideInterval));

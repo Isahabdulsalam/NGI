@@ -284,6 +284,7 @@ header.scrolled {
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
+    text-align: center;
 }
 
 .section-title::after {
@@ -303,6 +304,7 @@ header.scrolled {
     font-size: clamp(1rem, 2vw, 1.2rem);
     margin-top: 25px;
     line-height: 1.6;
+    text-align: center;
 
 }
 

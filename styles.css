@@ -304,7 +304,6 @@ header.scrolled {
     font-size: clamp(1rem, 2vw, 1.2rem);
     margin-top: 25px;
     line-height: 1.6;
-    text-align: center;
 
 }
 

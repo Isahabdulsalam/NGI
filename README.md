@@ -48,7 +48,7 @@ This website is designed to:
 For any questions, suggestions, or support:
 
 - **Head of ICT, Innovations and Virtual irtual Assistant Manager:** Isah Abdulsalam  
-- 📧 Email: [Isahabdulsalam416@gmail.com]  
+- 📧 Email: [Send Email] (isahabdulsalam416@gmail.com)
 - 📍 Location: Nigeria  
 - 🌐 Website: [NGI Official Website](https://ngi-weld.vercel.app/)
 - 📱 Phone: +2349063700385  

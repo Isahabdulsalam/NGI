@@ -1208,6 +1208,63 @@ footer {
     font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
+/* chatbot button */
+
+.chatbot-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 25px rgba(26, 58, 108, 0.5);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    text-decoration: none;
+    animation: pulse 2s infinite;
+}
+
+.chatbot-btn:hover {
+    background: var(--primary-light);
+    transform: scale(1.1 );
+    box-sizing: 0 8px 30px rgba(26, 58, 108, 0.7);
+}
+
+.chatbot-btn i {
+    font-size: 30px;
+}
+
+.chatbot-btn .tooltip {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: var(--secondary);
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.chatbot-btn:hover .tooltip {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); };
+    50% { transform: scale(1.05); };
+    100% { transform: scale(1); };
+}
 /* News Section */
 .news {
     background: var(--light-alt);
@@ -1236,7 +1293,7 @@ footer {
     transition: var(--transition);
 }
 
-.news-card:hover {
+.news-card:hover {    
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
@@ -1536,6 +1593,21 @@ ol, ul {
         --section-padding: 70px 0;
     }
     
+    .chatbot-btn {
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .chatbot-btn i {
+        font-size: 25px;
+    }
+
+    .chatbot-btn .tooltip {
+        top: -45%;
+        font-size: 0.9rem;
+    }
     .mobile-toggle {
         display: block;
     }

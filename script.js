@@ -20,6 +20,34 @@ if (mobileToggle && navMenu) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbotBtn = document.querySelector('chatbot-btn');
+
+    if (chatbotBtn) {
+        // initial animation
+        setTimeout(() => {
+            chatbotBtn.style.animation = 'pulse 2s 3';
+        }, 2000);
+
+        // pause animation on hover
+        chatbotBtn.addEventListener('mouseenter', function() {
+            this.style.animation = 'none';
+        });
+
+        chatbotBtn.addEventListener('mouseleave', function () {
+            this.style.animation = 'pulse 2s infinite';
+        });
+
+        // mobile tap animation
+        chatbotBtn.addEventListener('click', function() {
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)'; 
+            }, 300);
+        });
+    }
+});
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {

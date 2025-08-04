@@ -65,9 +65,9 @@ You can join the movement by:
 
 For further information, collaboration, or support:
 
-- **ICT Manager:** Isah Abdulsalam  
+- **Head of ICT, Innovation and Virtual Assistant Manager:** Isah Abdulsalam  
 - 📧 Email: nasherysglobalinitiative@gmail.com  
-- 📱 WhatsApp: +234 903 504 6262  
+- 📱 WhatsApp: +234 906 370 0385  
 - 🌍 Website: [https://ngi-weld.vercel.app](https://ngi-weld.vercel.app)  
 - 📸 Instagram: [@nasherys_global_initiative](https://www.instagram.com/nasherys_global_initiative)
 

@@ -57,8 +57,92 @@
                     <input type="email" id="email" name="email" required>
                 </div>
                 
-                <!-- ...all other fields from the specification... -->
-                
+                <div class="form-group">
+                    <label for="number">Phone Number*</label>
+                    <input type="tel" id="number" name="number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:
+                        <select name="gender" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth*</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nationality">Nationality*</label>
+                    <input type="text" id="nationality" name="nationality" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="chapter">State/Country*</label>
+                    <input type="text" id="chapter" name="chapter" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Current Location*</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation">Occupation*</label>
+                    <input type="text" id="occupation" name="occupation" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Member role*
+                        <select name="role" id="role" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="">Volunteer</option>
+                            <option value="">Board Member</option>
+                            <option value="">State Executive</option>
+                            <option value="">National Executive</option>
+                            <option value="">International Executives</option>
+                            <option value="">NGO Partner</option>
+                            <option value="">Intern</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="skill">Area of interest/skills*
+                        <select name="skill" id="skill" required>
+                            <option value="" multiple selected>Select</option>
+                            <option value="">Admin</option>
+                            <option value="">Media</option>
+                            <option value="">Teaching</option>
+                            <option value="">Medical</option>
+                            <option value="">Counselling</option>
+                            <option value="">Events Planning</option>
+                            <option value="">Other</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="referral">How did you hear about NGI? *
+                        <input type="text" name="referral" id="referral">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp-group">Are yopu already part of your chapter Whatsapp group? *
+                        <select name="whatsapp-group" id="whatsapp-group">
+                            <option value="" disabled selected>Select</option>
+                            <option value="">Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </label>
+               </div>
+
                 <div class="form-group">
                     <label for="photo">Upload your Photograph*</label>
                     <input type="file" id="photo" name="photo" accept="image/*" required>
@@ -131,6 +215,107 @@
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script>
+        // Add to script.js
+// Membership Form Submission
+document.getElementById('membershipForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    
+    // Disable button and show loading
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    submitBtn.disabled = true;
+    
+    // Get form values
+    const formData = {
+        fullName: form.fullName.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        // ...collect all other fields...
+        chapter: form.chapter.value
+    };
+    
+    // Simulate form processing
+    setTimeout(() => {
+        // Generate membership ID
+        const countryCode = formData.chapter;
+        const year = new Date().getFullYear();
+        const serial = Math.floor(Math.random() * 1000).toString().padStart(4, '0');
+        const membershipId = `NGI/${countryCode}/${year}/${serial}`;
+        
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.className = 'form-message success';
+        successMsg.innerHTML = `
+            <i class="fas fa-check-circle"></i>
+            <p>Registration successful! Your NGI Membership ID: <strong>${membershipId}</strong></p>
+            <p>Details have been sent to your email.</p>
+        `;
+        form.parentNode.insertBefore(successMsg, form.nextSibling);
+        
+        // Send confirmation email (simulated)
+        sendMembershipEmail(formData, membershipId);
+        
+        // Reset form
+        form.reset();
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+    }, 2000);
+});
+
+// Member Verification
+document.getElementById('searchBtn')?.addEventListener('click', function() {
+    const memberId = document.getElementById('memberIdSearch').value.trim();
+    const memberDetails = document.getElementById('memberDetails');
+    
+    if (!memberId) return;
+    
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+    this.disabled = true;
+    
+    // Simulate API call
+    setTimeout(() => {
+        // Mock response
+        const mockMember = {
+            fullName: "John Doe",
+            chapter: "NG",
+            role: "Volunteer",
+            skills: ["Teaching", "Event Planning"],
+            membershipId: memberId,
+            registrationDate: new Date().toISOString()
+        };
+        
+        if (memberId.startsWith("NGI/")) {
+            memberDetails.innerHTML = `
+                <div class="member-card">
+                    <h4>${mockMember.fullName}</h4>
+                    <div class="member-info">
+                        <p><strong>Membership ID:</strong> ${mockMember.membershipId}</p>
+                        <p><strong>Chapter:</strong> ${mockMember.chapter}</p>
+                        <p><strong>Role:</strong> ${mockMember.role}</p>
+                        <p><strong>Skills:</strong> ${mockMember.skills.join(', ')}</p>
+                        <p><strong>Registration Date:</strong> ${new Date(mockMember.registrationDate).toLocaleDateString()}</p>
+                    </div>
+                </div>
+            `;
+        } else {
+            memberDetails.innerHTML = `<p class="no-result">No member found with ID: ${memberId}</p>`;
+        }
+        
+        this.innerHTML = 'Search';
+        this.disabled = false;
+    }, 1000);
+});
+
+// Simulated email sending
+function sendMembershipEmail(member, membershipId) {
+    // This would be replaced with actual email sending logic
+    console.log(`Sending welcome email to: ${member.email}`);
+    console.log(`Membership ID: ${membershipId}`);
+}
+    </script>
 </body>
 </html>

@@ -20,31 +20,135 @@ if (mobileToggle && navMenu) {
     });
 }
 
+// Video Gallery Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const chatbotBtn = document.querySelector('chatbot-btn');
-
+    // Chatbot button functionality
+    const chatbotBtn = document.querySelector('.chatbot-btn');
+    
     if (chatbotBtn) {
         // initial animation
         setTimeout(() => {
             chatbotBtn.style.animation = 'pulse 2s 3';
         }, 2000);
-
+        
+        // Create pulse animation if it doesn't exist
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
         // pause animation on hover
         chatbotBtn.addEventListener('mouseenter', function() {
             this.style.animation = 'none';
         });
-
-        chatbotBtn.addEventListener('mouseleave', function () {
+        
+        chatbotBtn.addEventListener('mouseleave', function() {
             this.style.animation = 'pulse 2s infinite';
         });
-
+        
         // mobile tap animation
-        chatbotBtn.addEventListener('click', function() {
+        chatbotBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             this.style.transform = 'scale(0.9)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)'; 
             }, 300);
         });
+    }
+    
+    // Video Modal Functionality
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const closeVideoModal = document.querySelector('.close-video-modal');
+    const videoItems = document.querySelectorAll('.video-item');
+    
+    if (videoModal && videoFrame) {
+        // Open modal when video is clicked
+        videoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const videoUrl = this.getAttribute('data-video');
+                videoFrame.src = videoUrl;
+                videoModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+        });
+        
+        // Close modal
+        closeVideoModal.addEventListener('click', function() {
+            videoModal.style.display = 'none';
+            videoFrame.src = '';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close when clicking outside modal content
+        window.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                videoModal.style.display = 'none';
+                videoFrame.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+    
+    // Video filtering functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const allVideoItems = document.querySelectorAll('.video-item');
+    
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterValue = this.textContent.trim();
+                
+                // Filter videos
+                allVideoItems.forEach(item => {
+                    if (filterValue === 'All Videos') {
+                        item.style.display = 'block';
+                    } else {
+                        const category = item.getAttribute('data-category');
+                        if (filterValue.toLowerCase() === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    }
+    
+    // Search functionality
+    const searchBar = document.querySelector('.search-bar');
+    const searchBtn = document.querySelector('.search-btn');
+    
+    if (searchBar && searchBtn) {
+        function filterVideos() {
+            const searchTerm = searchBar.value.toLowerCase();
+            
+            allVideoItems.forEach(item => {
+                const title = item.querySelector('.video-title').textContent.toLowerCase();
+                const description = item.querySelector('.video-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        searchBar.addEventListener('input', filterVideos);
+        searchBtn.addEventListener('click', filterVideos);
     }
 });
 
@@ -61,7 +165,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         if (target) {
             // Calculate scroll position considering fixed header
-            const headerHeight = document.getElementById('header').offsetHeight;
+            const headerHeight = document.getElementById('header')?.offsetHeight || 70;
             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
             const scrollPosition = targetPosition - headerHeight;
             
@@ -291,4 +395,24 @@ function initGallery() {
 document.addEventListener('DOMContentLoaded', function() {
     initCarousel();
     initGallery();
+    
+    // Add animations for video items
+    const videoItems = document.querySelectorAll('.video-item');
+    videoItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s forwards`;
+    });
+    
+    // Add fadeInUp animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    `;
+    document.head.appendChild(style);
 });

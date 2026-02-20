@@ -1979,11 +1979,45 @@ ol, ul {
 }
 
 /* Donation Details Section */
+/* ===== PROFESSIONAL DONATION SECTION ===== */
+:root {
+    --primary-dark: #0d2440;
+    --primary-light: #1a3a6c;
+    --secondary: #d4af37;        /* gold accent */
+    --white: #ffffff;
+    --dark: #0a1a2f;
+    --radius: 20px;
+    --shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s ease;
+}
+
 .donation-details {
-    background: linear-gradient(135deg, #1a3a6c 0%, #0d2440 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
     color: var(--white);
     position: relative;
     overflow: hidden;
+    padding: 80px 0;              /* consistent section padding */
+}
+
+/* subtle pattern overlay */
+.donation-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* section header */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
 }
 
 .donation-title {
@@ -1991,8 +2025,9 @@ ol, ul {
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
-    text-align: center;
     color: var(--white);
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .donation-title::after {
@@ -2008,30 +2043,23 @@ ol, ul {
 }
 
 .donation-subtitle {
-    color: var(--white);
+    color: rgba(255, 255, 255, 0.9);
     font-size: clamp(1rem, 2vw, 1.2rem);
     margin-top: 25px;
     line-height: 1.6;
-
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.donation-details::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
-    opacity: 0.15;
-}
-
+/* two‑column layout */
 .donation-content {
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
     position: relative;
     z-index: 2;
+    align-items: stretch;
 }
 
 .donation-info {
@@ -2041,10 +2069,20 @@ ol, ul {
 
 .donation-card {
     background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius);
     padding: 40px;
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.donation-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
+    border-color: rgba(212, 175, 55, 0.4);
 }
 
 .donation-icon {
@@ -2058,32 +2096,44 @@ ol, ul {
     margin-bottom: 25px;
     font-size: 2.5rem;
     color: var(--dark);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .donation-card h3 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--white);
+    font-weight: 600;
 }
 
-.donation-card p {
+.donation-card > p {
     margin-bottom: 30px;
     font-size: 1.1rem;
     opacity: 0.9;
+    border-left: 4px solid var(--secondary);
+    padding-left: 20px;
 }
 
+/* account details container */
 .account-details {
     background: rgba(255, 255, 255, 0.15);
     border-radius: var(--radius);
     padding: 20px;
     margin: 30px 0;
+    backdrop-filter: blur(4px);
 }
 
 .detail-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;   /* better for multi‑line content */
     padding: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.detail-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
 }
 
 .detail-item:last-child {
@@ -2096,44 +2146,138 @@ ol, ul {
     color: var(--secondary);
     width: 40px;
     text-align: center;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
 }
 
-.detail-item div {
+.detail-item > div {
     flex: 1;
 }
 
 .detail-item span {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     opacity: 0.8;
     margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .detail-item strong {
     font-size: 1.2rem;
     font-weight: 700;
     display: block;
+    color: var(--white);
+    word-break: break-word;
 }
 
+/* currency list (multi‑currency) */
+.currency-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 15px;
+}
+
+.currency-item {
+    display: flex;
+    align-items: stretch;
+    background: rgba(0, 0, 0, 0.35);        /* deeper base for contrast */
+    border-radius: 60px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.5); /* gold border */
+    box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.currency-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--secondary);
+    box-shadow: 0 12px 20px -10px rgba(212, 175, 55, 0.4);
+}
+
+.currency-item .curr {
+    background: var(--secondary);            /* solid gold */
+    color: var(--dark);
+    padding: 8px 16px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);
+}
+
+.currency-item .number {
+    background: transparent;
+    color: white;
+    padding: 8px 20px 8px 16px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* KUDA bank additional formatting */
+.kuda-detail-group {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.kuda-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+}
+
+.kuda-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+    min-width: 120px;
+}
+
+.kuda-value {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* donation note */
 .donation-note {
     background: rgba(212, 175, 55, 0.2);
-    border-left: 4px solid var(--secondary);
-    padding: 15px 20px;
+    border-left: 5px solid var(--secondary);
+    padding: 18px 22px;
     border-radius: 0 var(--radius) var(--radius) 0;
     display: flex;
-    gap: 15px;
+    gap: 18px;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    margin-top: 30px;
 }
 
 .donation-note i {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: var(--secondary);
 }
 
 .donation-note p {
     margin: 0;
     font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.95;
 }
 
+/* image panel */
 .donation-image {
     flex: 1;
     min-width: 300px;
@@ -2141,11 +2285,18 @@ ol, ul {
     overflow: hidden;
     position: relative;
     box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.donation-image:hover {
+    transform: scale(1.01);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
 }
 
 .image-container {
     position: relative;
     height: 100%;
+    min-height: 450px;          /* ensures image area has height */
 }
 
 .donation-image img {
@@ -2153,6 +2304,11 @@ ol, ul {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.6s ease;
+}
+
+.donation-image:hover img {
+    transform: scale(1.05);
 }
 
 .image-overlay {
@@ -2160,35 +2316,73 @@ ol, ul {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
     padding: 30px;
     color: white;
+    text-align: left;
 }
 
 .image-overlay h4 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-/* Responsive adjustments */
+.image-overlay p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 280px;
+    line-height: 1.5;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* ===== RESPONSIVE FINE‑TUNING ===== */
+@media (max-width: 992px) {
+    .donation-content {
+        flex-direction: column;
+    }
+    
+    .donation-image .image-container {
+        min-height: 380px;
+    }
+}
+
 @media (max-width: 768px) {
+    .donation-details {
+        padding: 60px 0;
+    }
+    
     .donation-card {
         padding: 30px;
     }
     
     .detail-item {
-        padding: 10px;
+        padding: 12px;
     }
     
     .detail-item i {
         font-size: 1.5rem;
         margin-right: 15px;
+        width: 35px;
     }
     
     .detail-item strong {
         font-size: 1.1rem;
     }
+    
+    .kuda-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .kuda-label {
+        min-width: auto;
+    }
 }
+
+/* (Your existing extra small overrides remain untouched) */
 @media (max-width: 400px) {
     :root {
         --section-padding: 50px 0;
@@ -2230,7 +2424,6 @@ ol, ul {
         height: 250px;
     }
     
-    /* Handbook fine-tuning */
     .handbook-section p {
         font-size: 1rem;
     }
